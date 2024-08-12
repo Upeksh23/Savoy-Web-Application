@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" 
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="footer.css">
+
+
+    <title>Terms of Use - Savoy Cinema</title>
+
+</head>
+<script>
+    function searchMovies() {
+        const query = document.getElementById('searchInput').value;
+        if (query.length < 3) {
+            document.getElementById('searchResults').innerHTML = '';
+            return;
+        }
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'search_movies.php?q=' + query, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                const movies = JSON.parse(xhr.responseText);
+                let resultsHTML = '';
+                for (const movie of movies) {
+                    resultsHTML += `<div class="result-item" onclick="goToMovie(${movie.id})">
+                        <img src="${movie.movieImage}" alt="${movie.movieName}">
+                        <span>${movie.movieName}</span>
+                    </div>`;
+                }
+                document.getElementById('searchResults').innerHTML = resultsHTML;
+            }
+        };
+        xhr.send();
+    }
+
+    function goToMovie(movieId) {
+        window.location.href = 'booking.php?id=' + movieId;
+    }
+</script>
+
+<style>
+body {
+    object-fit: cover;
+    background-color: black;
+    overflow-x: hidden;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*Nav Bar*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(10px); 
+    padding: 10px 20px;
+    position: relative;
+    width: 97.3%;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.navbar .center a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 50px;
+    transition: 0.3s;
+}
+
+.navbar .center a:hover, .navbar .center a.active {
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+}
+
+.left a .logo {
+    width: 80px;
+    height: auto;
+    padding-top: 5px;
+}
+
+.right {
+    display: flex;
+}
+
+.search-bar {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.search-bar input {
+    border-color: #ddd;
+    height: 20px;
+    border-radius: 10px;
+    border: none;
+}
+
+.search-results {
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        width: 300px;
+    }
+    .search-results .result-item {
+        padding: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+    .search-results .result-item img {
+        width: 50px;
+        height: 75px;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+    .search-results .result-item:hover {
+        background-color: #f0f0f0;
+    }
+
+.profile-buttons {
+    display: inline-block;
+}
+
+.profile-button {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.226);
+    border-radius: 10px;
+}
+
+.profile-button:hover {
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+}
+
+.logo img {
+    width: 150px;
+}
+
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: black;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h1 {
+    text-align: center;
+    color: #e74c3c;
+}
+.main-content h2 {
+    color: #e74c3c;
+}
+
+.main-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.main-content ul li {
+    margin: 10px 0;
+}
+
+.policies {
+    flex-grow: 1; /* Expand to fill remaining space */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.policies a {
+    text-decoration: none;
+    color: white; /* Change text color to white */
+    margin-left: 20px;
+    font-size: 14px;
+    transition: color 0.3s ease; /* Add transition for color change */
+}
+
+.policies a:hover {
+    color: #600086; /* Change color on hover */
+    text-decoration: none;
+    font-size: 18px;
+}
+</style>
+<body>
+
+    <!-- Navigation bar -->
+<section>
+    <nav class="navbar">
+
+        <div class="left">
+            <a href="#"><img src="./uploads/icons/savoy.png" alt="Logo" class="logo"></a>
+        </div>
+
+        <div class="center">
+            <a href="./Index.php">Home</a>
+            <a href="./Aboutus.html">About Us</a>
+            <a href="./promotion.php">Promotions</a>
+        </div>
+
+        <div class="right">
+            <div class="profile-buttons">
+                <a href="./Signup.html" class="profile-button">Sign Up</a>
+                <a href="./Login.html" class="profile-button">Login</a>
+            </div>
+            </div>
+        </div>
+
+    </nav>
+</section>
+
+
+
+    <div class="container">
+
+        <main class="main-content">
+            <h1>Terms of Use</h1>
+            <p>Effective Date: [Insert Date]</p>
+
+            <section>
+                <h2>Acceptance of Terms</h2>
+                <p>By accessing and using the Savoy Cinema website, you agree to comply with and be bound by these terms of use and all applicable laws and regulations. If you do not agree with these terms, you are prohibited from using or accessing this site.</p>
+            </section>
+
+            <section>
+                <h2>Use of Site</h2>
+                <p>Permission is granted to temporarily download one copy of the materials (information or software) on Savoy Cinema's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license, you may not:</p>
+                <ul>
+                    <li>Modify or copy the materials;</li>
+                    <li>Use the materials for any commercial purpose, or for any public display (commercial or non-commercial);</li>
+                    <li>Attempt to decompile or reverse engineer any software contained on Savoy Cinema's website;</li>
+                    <li>Remove any copyright or other proprietary notations from the materials; or</li>
+                    <li>Transfer the materials to another person or "mirror" the materials on any other server.</li>
+                </ul>
+                <p>This license shall automatically terminate if you violate any of these restrictions and may be terminated by Savoy Cinema at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.</p>
+            </section>
+
+            <section>
+                <h2>Disclaimer</h2>
+                <p>The materials on Savoy Cinema's website are provided on an 'as is' basis. Savoy Cinema makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+                <p>Further, Savoy Cinema does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.</p>
+            </section>
+
+            <section>
+                <h2>Limitations</h2>
+                <p>In no event shall Savoy Cinema or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Savoy Cinema's website, even if Savoy Cinema or a Savoy Cinema authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.</p>
+            </section>
+
+            <section>
+                <h2>Accuracy of Materials</h2>
+                <p>The materials appearing on Savoy Cinema's website could include technical, typographical, or photographic errors. Savoy Cinema does not warrant that any of the materials on its website are accurate, complete or current. Savoy Cinema may make changes to the materials contained on its website at any time without notice. However, Savoy Cinema does not make any commitment to update the materials.</p>
+            </section>
+
+            <section>
+                <h2>Links</h2>
+                <p>Savoy Cinema has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Savoy Cinema of the site. Use of any such linked website is at the user's own risk.</p>
+            </section>
+
+            <section>
+                <h2>Modifications</h2>
+                <p>Savoy Cinema may revise these terms of use for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of use.</p>
+            </section>
+
+            <section>
+                <h2>Governing Law</h2>
+                <p>These terms and conditions are governed by and construed in accordance with the laws of [Your State/Country] and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
+            </section>
+        </main>
+    </div>
+
+<!-- Footer -->
+<section>
+<footer>
+        <div class="footercontainer">
+
+            <div class="socialIcons">
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-twitter"></i></a>
+            </div>
+
+            <div class="footerNav">
+                <ul>
+                    <li><a href="./privacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="./TermsandConditions.html">Terms and Conditions</a></li>
+                    <li><a href="./TermsofUse.html">Services</a></li>
+                    <li><a href="./contactus.html">Contact Us</a></li>
+                    <li><a href="./feedback.html">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footerBottom">
+            <p>Copyright &copy;2023; Designed by <samp class="designer">Savoy</samp></p>
+        </div>
+    </footer>
+</section>
+
+
+</body>
+
+</html>

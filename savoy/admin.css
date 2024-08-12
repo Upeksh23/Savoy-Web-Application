@@ -1,0 +1,186 @@
+body{
+    background-color: white;
+}
+
+/* Header */
+.Header {
+    display: flex;
+    width: 98%;
+    height: 100px;
+    justify-content: space-between;
+}
+
+/* Dropdown Menu */
+.nav-bar {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown img {
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2147ed5f;
+    min-width: 160px;
+    border-radius: 20px;
+    gap: 5px;
+    padding: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    transition: 0.3s;
+}
+
+.dropdown-content a {
+    color: rgb(255, 255, 255);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #600086;
+    border-radius: 20px;
+    color: white;
+    font-size: larger;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Welcome Massage */
+.wlcm h1 {
+    color: rgb(255, 255, 255);
+    margin-top: 10px;
+}
+
+
+/* Logout Button */
+.logout {
+    padding-top: 15px;
+}
+
+.logout a {
+    background-color: white;
+    text-decoration: none;
+    color: #000;
+    padding: 8px;
+    border-radius: 30px;
+    border: none;
+    font-weight: bolder;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.logout a:hover {
+    background-color: #600086;
+    color: white;
+}
+
+
+/* Add Movies Form */
+.Add-movies {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.movie-form-container {
+    background-color: #ffffff52;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 10px;
+}
+
+.movie-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: none;
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    border: none;
+    color: #000;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #600086;
+    color: white;
+}
+
+#successMessage {
+    margin-top: 20px;
+    color: green;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.cast-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+#addCast {
+    display: block;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#addCast:hover {
+    background-color: #0056b3;
+}

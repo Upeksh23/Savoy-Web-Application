@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./admin.css">
+    <title>Add Movie</title>
+</head>
+<style>
+    body{
+    overflow-x: hidden;
+    background-color: white;
+}
+
+/* Header */
+.Header {
+    display: flex;
+    width: 98%;
+    height: 100px;
+    justify-content: space-between;
+}
+
+/* Dropdown Menu */
+.nav-bar {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown img {
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left: 5px;
+    background-color: #000;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #1b32995f;
+    min-width: 160px;
+    border-radius: 20px;
+    gap: 5px;
+    padding: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    transition: 0.3s;
+}
+
+.dropdown-content a {
+    color: rgb(0, 0, 0);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(0, 0, 37, .8);
+    border-radius: 20px;
+    color: white;
+    font-size: larger;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Logout Button */
+.logout {
+    padding-top: 15px;
+}
+
+.logout a {
+    background-color: white;
+    text-decoration: none;
+    color: #000;
+    padding: 8px;
+    border-radius: 30px;
+    border: none;
+    font-weight: bolder;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.logout a:hover {
+    background-color: rgba(0, 0, 37, .8);
+    color: white;
+}
+
+
+/* Add Movies Form */
+.Add-movies {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.movie-form-container {
+    background-color: rgba(55, 146, 171, 0.523);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 10px;
+}
+
+.movie-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: none;
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    border: none;
+    color: #000;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background-color: rgba(0, 0, 37, .8);
+    color: white;
+}
+
+#successMessage {
+    margin-top: 20px;
+    color: green;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.cast-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+#addCast {
+    display: block;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#addCast:hover {
+    background-color: #0056b3;
+}
+</style>
+<body>
+    <!-- Header -->
+    <section>
+        <div class="Header">
+            <div class="nav-bar">
+                <div class="dropdown">
+                    <a href="#"><img src="./uploads/icons/list.png" alt="Menu"></a>
+                    <div class="dropdown-content">
+                        <a href="./adminpanel.php">Home</a>
+                        <a href="./addmovies.html">Add Movies</a>
+                        <a href="./staffSignup.html">Create Staff Account</a>
+                        <a href="./CheckBookings.php">Check Bookings</a>
+                    </div>
+                </div>
+            </div>
+            <div class="logout">
+                <a href="./Index.php">Logout</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Adding Movies -->
+    <div class="Add-movies">
+        <div class="movie-form-container">
+            <h2>Add Movie</h2>
+            <form action="./add_movie.php" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="movieName">Movie Name:</label>
+                    <input type="text" name="movieName" placeholder="Enter Movie Title" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Movie Image:</label>
+                    <input type="file" name="movieImage" accept="image/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="releaseDate">Release Date:</label>
+                    <input type="date" name="releaseDate" required>
+                </div>                
+
+                <div class="form-group">
+                    <label>Movie Description:</label>
+                    <textarea name="movieDescription" placeholder="Describe the Movie" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="movieLanguage">Movie Language:</label>
+                    <select name="movieLanguage" required>
+                        <option value="English">English</option>
+                        <option value="French">Tamil</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Hindi">Sinhala</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Showing Date:</label>
+                    <input type="date" name="showingDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Ending Date:</label>
+                    <input type="date" name="endingDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Showing Time 1:</label>
+                    <input type="time" name="showingTime1" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Showing Time 2:</label>
+                    <input type="time" name="showingTime2" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Showing Time 3:</label>
+                    <input type="time" name="showingTime3" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Dimension:</label>
+                    <select name="dimension" required>
+                        <option value="2D">2D</option>
+                        <option value="3D">3D</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Genre:</label>
+                    <select name="genre" required>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Conedy">Comedy</option>
+                        <option value="Animation">Animation</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Rating:</label>
+                    <select name="rating" required>
+                        <option value="G - General Audience">G - General Audience</option>
+                        <option value="PG - Parental Guidance">PG - Parental Guidance</option>
+                        <option value="R - Restricted">R - Restricted</option>
+                        <option value="NC-17 - Adults Only">NC-17 - Adults Only</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cast">Casts:</label>
+                    <div class="cast-input">
+                        <input type="text" name="castName[]" placeholder="Enter Cast Name" required>
+                        <input type="file" name="castImage[]" accept="image/*" required>
+                    </div>
+
+                    <div class="cast-input">
+                        <input type="text" name="castName[]" placeholder="Enter Cast Name" required>
+                        <input type="file" name="castImage[]" accept="image/*" required>
+                    </div>
+
+                    <div class="cast-input">
+                        <input type="text" name="castName[]" placeholder="Enter Cast Name" required>
+                        <input type="file" name="castImage[]" accept="image/*" required>
+                    </div>
+
+                    <div class="cast-input">
+                        <input type="text" name="castName[]" placeholder="Enter Cast Name" required>
+                        <input type="file" name="castImage[]" accept="image/*" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>YouTube Trailer Link:</label>
+                    <input type="url" name="trailerLink" placeholder="Add YouTube Trailer Link" required>
+                </div>
+                <button class="add-btn" type="submit">Add Movie</button>
+            </form>
+            <div class="hidden">Movie added successfully!</div>
+        </div>
+    </div>
+</body>
+</html>

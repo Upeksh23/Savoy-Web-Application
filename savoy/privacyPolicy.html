@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" 
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Privacy Policy - Savoy Cinema</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="footer.css">
+</head>
+
+<script>
+    function searchMovies() {
+        const query = document.getElementById('searchInput').value;
+        if (query.length < 3) {
+            document.getElementById('searchResults').innerHTML = '';
+            return;
+        }
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'search_movies.php?q=' + query, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                const movies = JSON.parse(xhr.responseText);
+                let resultsHTML = '';
+                for (const movie of movies) {
+                    resultsHTML += `<div class="result-item" onclick="goToMovie(${movie.id})">
+                        <img src="${movie.movieImage}" alt="${movie.movieName}">
+                        <span>${movie.movieName}</span>
+                    </div>`;
+                }
+                document.getElementById('searchResults').innerHTML = resultsHTML;
+            }
+        };
+        xhr.send();
+    }
+
+    function goToMovie(movieId) {
+        window.location.href = 'booking.php?id=' + movieId;
+    }
+</script>
+
+<style>
+body {
+    object-fit: cover;
+    background-color: black;
+    overflow-x: hidden;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*Nav Bar*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(10px); 
+    padding: 10px 20px;
+    position: relative;
+    width: 97.3%;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.navbar .center a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 50px;
+    transition: 0.3s;
+}
+
+.navbar .center a:hover, .navbar .center a.active {
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+}
+
+.left a .logo {
+    width: 80px;
+    height: auto;
+    padding-top: 5px;
+}
+
+.right {
+    display: flex;
+}
+
+.search-bar {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.search-bar input {
+    border-color: #ddd;
+    height: 20px;
+    border-radius: 10px;
+    border: none;
+}
+
+.search-results {
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        width: 300px;
+    }
+    .search-results .result-item {
+        padding: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+    .search-results .result-item img {
+        width: 50px;
+        height: 75px;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+    .search-results .result-item:hover {
+        background-color: #f0f0f0;
+    }
+
+.profile-buttons {
+    display: inline-block;
+}
+
+.profile-button {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.226);
+    border-radius: 10px;
+}
+
+.profile-button:hover {
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+
+/* Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+}
+
+.logo img {
+    width: 150px;
+}
+
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: black;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h1 {
+    text-align: center;
+    color: #e74c3c;
+}
+.main-content h2 {
+    color: #e74c3c;
+}
+
+.main-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.main-content ul li {
+    margin: 10px 0;
+}
+
+
+
+.policies {
+    flex-grow: 1; 
+    display: flex;
+    justify-content: flex-end;
+}
+
+.policies a {
+    text-decoration: none;
+    color: white; 
+    margin-left: 20px;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.policies a:hover {
+    color: #600086;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+</style>
+
+
+<body>
+
+<!-- Navigation bar -->
+<section>
+    <nav class="navbar">
+
+        <div class="left">
+            <a href="#"><img src="./uploads/icons/savoy.png" alt="Logo" class="logo"></a>
+        </div>
+
+        <div class="center">
+            <a href="./Index.php">Home</a>
+            <a href="./Aboutus.html">About Us</a>
+            <a href="./promotion.php">Promotions</a>
+        </div>
+
+        <div class="right">
+            <div class="profile-buttons">
+                <a href="./Signup.html" class="profile-button">Sign Up</a>
+                <a href="./Login.html" class="profile-button">Login</a>
+            </div>
+            </div>
+        </div>
+
+    </nav>
+</section>
+
+
+
+    <div class="container">
+        <main class="main-content">
+            <h1>Privacy Policy</h1>
+            <p>Effective Date: [Insert Date]</p>
+
+            <section>
+                <h2>Introduction</h2>
+                <p>Welcome to Savoy Cinema. We value your privacy and are committed to protecting your personal data.
+                    This privacy policy explains how we collect, use, and share information about you when you use our
+                    website and services.</p>
+            </section>
+
+            <section>
+                <h2>Information We Collect</h2>
+                <p>We may collect and process the following information about you:</p>
+                <ul>
+                    <li>Personal Identification Information (Name, email address, phone number, etc.)</li>
+                    <li>Payment Information (credit card details, billing address, etc.)</li>
+                    <li>Technical Data (IP address, browser type, etc.)</li>
+                    <li>Usage Data (information on how you use our website and services)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>How We Use Your Information</h2>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide and maintain our services</li>
+                    <li>Process transactions and send related information</li>
+                    <li>Improve, personalize, and expand our services</li>
+                    <li>Communicate with you, including customer service and promotional communications</li>
+                    <li>Comply with legal obligations and protect our legal rights</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Sharing Your Information</h2>
+                <p>We may share your information with third parties in the following situations:</p>
+                <ul>
+                    <li>With service providers who perform services on our behalf</li>
+                    <li>With third parties to comply with legal obligations or protect our rights</li>
+                    <li>With your consent or at your direction</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Your Rights</h2>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Access, update, or delete your personal information</li>
+                    <li>Object to or restrict the processing of your data</li>
+                    <li>Withdraw your consent at any time</li>
+                    <li>Complain to a data protection authority</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Contact Us</h2>
+                <p>If you have any questions about this privacy policy or our data practices, please contact us at:</p>
+                <p>Email: support@savoycinema.com</p>
+                <p>Address: 123 Cinema Lane, Movietown, USA</p>
+            </section>
+        </main>
+    </div>
+
+<!-- Footer -->
+<footer>
+        <div class="footercontainer">
+
+            <div class="socialIcons">
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-twitter"></i></a>
+            </div>
+
+            <div class="footerNav">
+                <ul>
+                    <li><a href="./privacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="./TermsandConditions.html">Terms and Conditions</a></li>
+                    <li><a href="./TermsofUse.html">Services</a></li>
+                    <li><a href="./contactus.html">Contact Us</a></li>
+                    <li><a href="./feedback.html">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footerBottom">
+            <p>Copyright &copy;2023; Designed by <samp class="designer">Savoy</samp></p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
